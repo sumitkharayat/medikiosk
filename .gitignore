@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*.db
+
+# Node
+node_modules/
+dist/
+
+# Env
+.env
+.env.local
+
+# Runtime uploads
+backend/uploads/
+
+# macOS
+.DS_Store
