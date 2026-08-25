@@ -1,4 +1,5 @@
 import os
+import logging
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -11,8 +12,16 @@ from app.routers.patients import router as patient_router
 from app.routers.doctor import router as doctor_router
 from app.repositories.patient_repository import PatientRepository
 
+logging.basicConfig(level=logging.INFO)
+_log = logging.getLogger(__name__)
+
 # Create database tables automatically
 Base.metadata.create_all(bind=engine)
+
+if settings.GROQ_API_KEY:
+    _log.info("Red-flag detection: rule-based + Groq/Llama-3 enhancement (ACTIVE)")
+else:
+    _log.info("Red-flag detection: rule-based only (GROQ_API_KEY not set)")
 
 # Create uploads directory if it does not exist
 uploads_dir = os.path.join(os.getcwd(), "backend", "uploads")
