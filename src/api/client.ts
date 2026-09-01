@@ -12,7 +12,10 @@ import {
   RegisterData
 } from '../types';
 
-const API_BASE = '/api';
+// In local dev this stays '/api' and is proxied to the backend by vite.config.ts.
+// On Render (or anywhere the frontend and backend are on different domains), set
+// VITE_API_BASE_URL to the backend's full URL, e.g. https://medikiosk-backend.onrender.com/api
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
 
 class ApiClient {
   private token: string | null = null;
